@@ -24,28 +24,36 @@ import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText notaG1EditText;
+    private EditText notaG2EditText;
+    private EditText segChamG1EditText;
+    private EditText segChamG2EditText;
+    private EditText substutivaG1EditText;
+    private EditText substutivaG2EditText;
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Context context = getApplicationContext();
-        final EditText notaG1EditText = (EditText) findViewById(R.id.NotaG1_Edit_View);
-        assert notaG1EditText != null;
-        notaG1EditText.setOnFocusChangeListener(new OnFocusChangeListener() {
+        //Captura os campos de texto da Activity
+        notaG1EditText = (EditText) findViewById(R.id.NotaG1_Edit_View);
+        notaG2EditText = (EditText) findViewById(R.id.NotaG2_Edit_View);
+        segChamG1EditText = (EditText) findViewById(R.id.SegundaChamadaG1_Edit_View);
+        segChamG2EditText = (EditText) findViewById(R.id.SegundaChamadaG2_Edit_View);
+        substutivaG1EditText = (EditText) findViewById(R.id.SubstutivaG1_Edit_View);
+        substutivaG2EditText = (EditText) findViewById(R.id.SubstutivaG2_Edit_View);
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-
-                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(notaG1EditText.getWindowToken(), 0);
-                }
-            }
-        });
+        //Adiciona os ouvintes para o teclado
+        context = getApplicationContext();
+        notaG1EditText.setOnFocusChangeListener(new Hide(context, notaG1EditText));
+        notaG2EditText.setOnFocusChangeListener(new Hide(context, notaG2EditText));
+        segChamG1EditText.setOnFocusChangeListener(new Hide(context, segChamG1EditText));
+        segChamG2EditText.setOnFocusChangeListener(new Hide(context, segChamG2EditText));
+        substutivaG1EditText.setOnFocusChangeListener(new Hide(context, substutivaG1EditText));
+        substutivaG2EditText.setOnFocusChangeListener(new Hide(context, substutivaG2EditText));
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,12 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickBtnResult(View view) {
         Intent intent = new Intent(getApplicationContext(), Result.class);
-        EditText notaG1EditText = (EditText) findViewById(R.id.NotaG1_Edit_View);
-        EditText notaG2EditText = (EditText) findViewById(R.id.NotaG2_Edit_View);
-        EditText segChamG1EditText = (EditText) findViewById(R.id.SegundaChamadaG1_Edit_View);
-        EditText segChamG2EditText = (EditText) findViewById(R.id.SegundaChamadaG2_Edit_View);
-        EditText substutivaG1EditText = (EditText) findViewById(R.id.SubstutivaG1_Edit_View);
-        EditText substutivaG2EditText = (EditText) findViewById(R.id.SubstutivaG2_Edit_View);
+
         assert notaG1EditText != null;
         String notag1 = notaG1EditText.getText().toString();
         assert notaG2EditText != null;

@@ -12,35 +12,40 @@
         android:src="@drawable/logo_unisep" />
 
     <TextView
-        android:id="@+id/situation_Text_View"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="teste"
-        android:textSize="32sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/media_Text_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/situation_Text_View"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="teste"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/situation_Text_View"
+        android:layout_above="@id/media_Text_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="teste"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/subs_Text_Vew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/situation_Text_View"
+        android:layout_below="@id/media_Text_View"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="teste"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"/>
 
 </RelativeLayout>

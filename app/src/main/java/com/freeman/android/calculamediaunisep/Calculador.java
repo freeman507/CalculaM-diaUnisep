@@ -177,11 +177,11 @@ public class Calculador {
                 break;
             case 1:
                 result = (21 - this.g1) / 2;
-                launchActivityResult("Voce precisa de "+String.format("%.2f",result)+" na G2");
+                launchActivityResult(result);
                 break;
             case 2:
                 result = (21 - this.segG1) /2;
-                launchActivityResult("Voce precisa de "+String.format("%.2f",result)+" na G2");
+                launchActivityResult(result);
                 break;
             case 3:
                 result = (this.subsG1 + (2*this.g2)) / 3;
@@ -197,12 +197,15 @@ public class Calculador {
                 break;
             case 6:
                 result = (this.g1 + (2*this.g2)) / 3;
+                launchActivityResult2(result,this.g1,this.g2);
                 break;
             case 7:
                 result = (this.g1 + (2*this.segG2)) / 3;
+                launchActivityResult2(result,this.g1,this.segG2);
                 break;
             case 8:
                 result = (this.g1 + (2*this.segG2)) / 3;
+                launchActivityResult2(result,this.g1,this.segG2);
                 break;
             case 9:
                 result = (this.g1 + (2*this.subsG2)) / 3;
@@ -226,6 +229,7 @@ public class Calculador {
                 break;
             case 14:
                 result = (this.segG1 + (2*this.g2)) / 3;
+                launchActivityResult2(result,this.segG1,this.g2);
                 break;
             case 15:
                 result = (this.subsG1 + (2*this.g2)) / 3;
@@ -237,6 +241,7 @@ public class Calculador {
                 break;
             case 17:
                 result = (this.segG1 + (2*this.segG2)) / 3;
+                launchActivityResult2(result,this.segG1,this.segG2);
                 break;
             case 18:
                 result = (this.subsG1 + (2*this.segG2)) / 3;
@@ -252,11 +257,11 @@ public class Calculador {
                 break;
             case 21:
                 result = (21 - this.segG1) / 2;
-                launchActivityResult("Voce precisa de "+String.format("%.2f",result)+" na G2");
+                launchActivityResult(result);
                 break;
             case 22:
                 result = (this.segG1 + (2*this.segG2)) / 3;
-                errorWindow("case 22",""+result);
+                launchActivityResult2(result,this.segG1,this.segG2);
                 break;
             case 23:
                 result = (this.subsG1 + (2*this.segG2)) / 3;
@@ -273,6 +278,14 @@ public class Calculador {
             case 26:
                 result = (this.subsG1 + (2*this.g2)) / 3;
                 launchActivityResult3(result);
+                break;
+            case 27:
+                result = (this.segG1 + (2*this.segG2)) / 3;
+                launchActivityResult2(result, this.segG1, this.segG2);
+                break;
+            case 28:
+                result = (this.segG1 + (2*this.g2)) / 3;
+                launchActivityResult2(result, this.segG1, this.g2);
                 break;
         }
     }
@@ -382,6 +395,14 @@ public class Calculador {
         else if(!this.notaG1.equals("") && !this.notaG2.equals("") && this.notaSegChamG1.equals("") &&
                 this.notaSegChamG2.equals("") && !this.notaSubsG1.equals("") && this.notaSubsG2.equals("")) {
             caso = 26;
+        }
+        else if(!this.notaG1.equals("") && !this.notaG2.equals("") && !this.notaSegChamG1.equals("") &&
+                !this.notaSegChamG2.equals("") && this.notaSubsG1.equals("") && this.notaSubsG2.equals("")) {
+            caso = 27;
+        }
+        else if(!this.notaG1.equals("") && !this.notaG2.equals("") && !this.notaSegChamG1.equals("") &&
+                this.notaSegChamG2.equals("") && this.notaSubsG1.equals("") && this.notaSubsG2.equals("")) {
+            caso = 28;
         }
         else caso = 0;
         return caso;
@@ -497,7 +518,10 @@ public class Calculador {
         alerta.show();
     }
 
-    public void launchActivityResult(String message) {
+    public void launchActivityResult(double result) {
+        String message = "";
+        if(result > 10) message ="Sua nota é muito baixa.\nFaça substutiva de G1";
+        else message ="Você precisa de "+String.format("%.2f",result)+" na G2";
         Intent intent = new Intent(activity.getApplicationContext(), Result.class);
         Bundle params = new Bundle();
         params.putString("message",message);
@@ -505,10 +529,42 @@ public class Calculador {
         activity.startActivity(intent);
     }
 
-    public void launchActivityResult2(String media, String situation, String subs) {
+    public void launchActivityResult2(double media, double nota1, double nota2) {
+        String mediaTxt="",situation="",subs="";
+        double n1, n2; //n1 = subs1 n2 = subs2
+        if(media>=7) {
+            mediaTxt = "Sua média: "+String.format("%.2f",media);
+            situation = "Você está aprovado.";
+        }
+        else {
+            n1 = (21 - (2*nota2));
+            n2 = (21 - nota1) / 2;
+            if(n1 > 10 && n2 > 10) {
+                mediaTxt = "Sua média: "+String.format("%.2f",media);
+                situation = "Você está reprovado.";
+                subs = "Não existe a possibilidade de passar com substutiva.";
+            }
+            else if(n1 <= 10 && n2 >10) {
+                mediaTxt = "Sua média: "+String.format("%.2f",media);
+                situation = "Você pegou substutiva.";
+                subs = "Sua opção:\nSubstituir a G1: "+String.format("%.2f",n1);
+            }
+            else if(n1 > 10 && n2 <=10) {
+                mediaTxt = "Sua média: "+String.format("%.2f",media);
+                situation = "Você pegou substutiva.";
+                subs = "Sua opção\nSubstituir a G2: "+String.format("%.2f",n2);
+            }
+            else {
+                mediaTxt = "Sua média: "+String.format("%.2f",media);
+                situation = "Você pegou substutiva.";
+                subs = "Sua opção:\nSubstituir a G1: "+String.format("%.2f",n1) + "" +
+                        "\nou G2: "+String.format("%.2f",n2);
+            }
+        }
+
         Intent intent = new Intent(activity.getApplicationContext(), Result2.class);
         Bundle params = new Bundle();
-        params.putString("media",media);
+        params.putString("media",mediaTxt);
         params.putString("situation", situation);
         params.putString("subs",subs);
         intent.putExtras(params);
@@ -516,11 +572,11 @@ public class Calculador {
     }
 
     public void launchActivityResult3(double result) {
-        String situation, media = String.format("%.2f",result);
+        String situation, media = "Sua média: "+ String.format("%.2f",result);
         if(result<7)
-            situation = "Sinto muito. Você reprovou.";
+            situation = "Reprovado";
         else
-            situation = "Parabéns. Você foi aprovado.";
+            situation = "Aprovado";
         Intent intent = new Intent(activity.getApplicationContext(), Result3.class);
         Bundle params = new Bundle();
         params.putString("media",media);
