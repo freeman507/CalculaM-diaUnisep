@@ -173,7 +173,7 @@ public class Calculador {
         double result;
         switch (caso) {
             case 0:
-                errorWindow("Erro","Não é possivel ter estas combinações de notas.");
+                errorWindow("Erro","Não é possível ter estas combinações de notas.");
                 break;
             case 1:
                 result = (21 - this.g1) / 2;
@@ -410,16 +410,21 @@ public class Calculador {
 
     public boolean vereficaNotas() {
         boolean isOk = true;
+        String erroFormatoNumero = "A nota não pode conter mais de um ponto ou virgula.\n\n" +
+                "Exemplos de notas aceitas:\n10 9.5 8.5";
+        String erroNumeroMaior = "A nota deve ser igual ou menor que 10. Certifique-se também se" +
+                " os números decimais estão separados por ponto ou virgula" +
+                "\n\nExemplos de notas aceitas:\n10 9.5 8.5";
         if(!this.notaG1.equals("")) {
             this.notaG1 = this.notaG1.replace(",",".");
             try {
                 this.g1 = Double.parseDouble(this.notaG1);
             }catch (IllegalFormatConversionException | NumberFormatException ex) {
-                errorWindow("Nota G1","Certifique-se que a nota G1 foi digitada corretamente");
+                errorWindow("Nota G1",erroFormatoNumero);
                 isOk = false;
             }
             if(this.g1 > 10) {
-                errorWindow("Nota G1","A nota da G1 deve ser menor que 10.");
+                errorWindow("Nota G1",erroNumeroMaior);
                 isOk = false;
             }
         }
@@ -429,11 +434,11 @@ public class Calculador {
             try {
                 this.g2 = Double.parseDouble(this.notaG2);
             }catch (IllegalFormatConversionException | NumberFormatException ex) {
-                errorWindow("Nota G2","Certifique-se que a nota G2 foi digitada corretamente");
+                errorWindow("Nota G2",erroFormatoNumero);
                 isOk = false;
             }
             if(this.g2 > 10) {
-                errorWindow("Nota G2","A nota da G2 deve ser menor que 10.");
+                errorWindow("Nota G2",erroNumeroMaior);
                 isOk = false;
             }
         }
@@ -443,12 +448,11 @@ public class Calculador {
             try {
                 this.segG1 = Double.parseDouble(this.notaSegChamG1);
             }catch (IllegalFormatConversionException | NumberFormatException ex) {
-                errorWindow("Segunda Chamada G1","Certifique-se que a nota da Segunda Chamada" +
-                        "da G1 foi digitada corretamente");
+                errorWindow("Segunda Chamada G1",erroFormatoNumero);
                 isOk = false;
             }
             if(this.segG1 > 10) {
-                errorWindow("Segunda Chamada G1","A nota da Segunda Chamada G1 deve ser menor que 10.");
+                errorWindow("Segunda Chamanda G1",erroNumeroMaior);
                 isOk = false;
             }
         }
@@ -458,12 +462,11 @@ public class Calculador {
             try {
                 this.segG2 = Double.parseDouble(this.notaSegChamG2);
             }catch (IllegalFormatConversionException | NumberFormatException ex) {
-                errorWindow("Segunda Chamada G2","Certifique-se que a nota da Segunda Chamada" +
-                        "da G2 foi digitada corretamente");
+                errorWindow("Segunda Chamada G2",erroFormatoNumero);
                 isOk = false;
             }
             if(this.segG2 > 10) {
-                errorWindow("Segunda Chamada G2","A nota da Segunda Chamada G2 deve ser menor que 10.");
+                errorWindow("Segunda Chamanda G2",erroNumeroMaior);
                 isOk = false;
             }
         }
@@ -473,12 +476,11 @@ public class Calculador {
             try {
                 this.subsG1 = Double.parseDouble(this.notaSubsG1);
             }catch (IllegalFormatConversionException | NumberFormatException ex) {
-                errorWindow("Substutiva G1","Certifique-se que a nota da Substutiva" +
-                        "da G1 foi digitada corretamente");
+                errorWindow("Substutiva G1",erroFormatoNumero);
                 isOk = false;
             }
             if(this.subsG1 > 10) {
-                errorWindow("Substutiva G1","A nota da Substutiva G1 deve ser menor que 10.");
+                errorWindow("Substutiva G1",erroNumeroMaior);
                 isOk = false;
             }
         }
@@ -488,12 +490,11 @@ public class Calculador {
             try {
                 this.subsG2 = Double.parseDouble(this.notaSubsG2);
             }catch (IllegalFormatConversionException | NumberFormatException ex) {
-                errorWindow("Substutiva G2","Certifique-se que a nota da Substutiva" +
-                        "da G2 foi digitada corretamente");
+                errorWindow("Substutiva G2",erroFormatoNumero);
                 isOk = false;
             }
             if(this.subsG2 > 10) {
-                errorWindow("Substutiva G2","A nota da Substutiva G2 deve ser menor que 10.");
+                errorWindow("Substutiva G2",erroNumeroMaior);
                 isOk = false;
             }
         }
@@ -534,31 +535,32 @@ public class Calculador {
         double n1, n2; //n1 = subs1 n2 = subs2
         if(media>=7) {
             mediaTxt = "Sua média: "+String.format("%.2f",media);
-            situation = "Você está aprovado.";
+            situation = "Aprovado.";
         }
         else {
             n1 = (21 - (2*nota2));
             n2 = (21 - nota1) / 2;
             if(n1 > 10 && n2 > 10) {
                 mediaTxt = "Sua média: "+String.format("%.2f",media);
-                situation = "Você está reprovado.";
+                situation = "Reprovado.";
                 subs = "Não existe a possibilidade de passar com substutiva.";
             }
             else if(n1 <= 10 && n2 >10) {
                 mediaTxt = "Sua média: "+String.format("%.2f",media);
                 situation = "Você pegou substutiva.";
-                subs = "Sua opção:\nSubstituir a G1: "+String.format("%.2f",n1);
+                subs = "Você deve conseguir:\n"+String.format("%.2f",n1)+" para substituir a G1.";
             }
             else if(n1 > 10 && n2 <=10) {
                 mediaTxt = "Sua média: "+String.format("%.2f",media);
                 situation = "Você pegou substutiva.";
-                subs = "Sua opção\nSubstituir a G2: "+String.format("%.2f",n2);
+                subs = "Você deve conseguir:\n"+String.format("%.2f",n2)+" para substituir a G2.";
             }
             else {
                 mediaTxt = "Sua média: "+String.format("%.2f",media);
                 situation = "Você pegou substutiva.";
-                subs = "Sua opção:\nSubstituir a G1: "+String.format("%.2f",n1) + "" +
-                        "\nou G2: "+String.format("%.2f",n2);
+                subs = "Você pode conseguir\n" +
+                        ""+String.format("%.2f",n1) + " na substutiva G1 ou\n" +
+                        ""+String.format("%.2f",n2) + " na substutiva G2.";
             }
         }
 

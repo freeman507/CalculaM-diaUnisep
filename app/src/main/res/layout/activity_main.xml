@@ -66,10 +66,10 @@
                         android:layout_marginTop="8dp"
                         android:digits="1234567890,."
                         android:ems="3"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="5"
-                        android:singleLine="true"
+
                         android:textSize="24sp" />
                 </RelativeLayout>
 
@@ -99,7 +99,7 @@
                         android:layout_marginTop="8dp"
                         android:digits="0123456789.,"
                         android:ems="3"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="5"
                         android:singleLine="true"
@@ -132,7 +132,7 @@
                         android:layout_marginTop="8dp"
                         android:digits="0123456789.,"
                         android:ems="3"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="5"
                         android:singleLine="true"
@@ -182,7 +182,7 @@
                         android:layout_marginTop="8dp"
                         android:digits="0123456789.,"
                         android:ems="3"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="5"
                         android:singleLine="true"
@@ -216,7 +216,7 @@
                         android:layout_marginTop="8dp"
                         android:digits="0123456789.,"
                         android:ems="3"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="5"
 
@@ -250,6 +250,7 @@
                         android:layout_marginTop="8dp"
                         android:digits="0123456789.,"
                         android:ems="3"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="5"
                         android:singleLine="true"

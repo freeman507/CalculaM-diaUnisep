@@ -4,23 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/logo_unisep" />
-
     <TextView
         android:id="@+id/Result_Text_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_margin="8dp"
         android:text="teste"
-        android:textSize="24sp"
         android:textAlignment="center"
         android:textColor="@android:color/black"
+        android:textSize="24sp"
         android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/Result_Text_View"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/logo_unisep2" />
 
 </RelativeLayout>

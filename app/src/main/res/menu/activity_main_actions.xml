@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:CalculaMediaUnisep="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_refresh"
+        android:id="@+id/action_info"
         android:icon="@android:drawable/ic_menu_info_details"
         CalculaMediaUnisep:showAsAction="ifRoom"
         android:title="Info" />
